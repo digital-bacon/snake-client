@@ -18,14 +18,13 @@ const handleUserInput = function (key) {
     console.log('Returning you to your boring shell.')
     process.exit();
   };
-  if (key === 'w')
-    connection.write('Move: up');
-  if (key === 'a')
-    connection.write('Move: left');
-  if (key === 's')
-    connection.write('Move: down');
-  if (key === 'd')
-    connection.write('Move: right');
+  const keyActions = {
+    w: () => connection.write('Move: up'),
+    a: () => connection.write('Move: left'),
+    s: () => connection.write('Move: down'),
+    d: () => connection.write('Move: right'),
+  }
+  keyActions[key]();
 };
 
 module.exports = { setupInput }
