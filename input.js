@@ -1,4 +1,4 @@
-const keyBindings = require("./keyBindings");
+const { KEYBINDINGS } = require("./constants");
 
 // Stores the active TCP connection object.
 let connection;
@@ -21,8 +21,8 @@ const handleUserInput = function(keyPressed) {
     process.exit();
   };
   // Handle all other key presses
-  if (keyBindings[keyPressed] === undefined) return
-  connection.write(keyBindings[keyPressed]);
+  if (KEYBINDINGS[keyPressed] === undefined) return
+  connection.write(KEYBINDINGS[keyPressed]);
 };
 
 module.exports = { setupInput }
