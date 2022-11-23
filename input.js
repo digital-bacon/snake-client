@@ -1,4 +1,4 @@
-const keys = require("./keyBindings");
+const keyBindings = require("./keyBindings");
 
 // Stores the active TCP connection object.
 let connection;
@@ -14,14 +14,15 @@ const setupInput = function (conn) {
   return stdin;
 };
 
-const handleUserInput = function (key) {
+const handleUserInput = function(keyPressed) {
   // \u0003 maps to ctrl+c input, used to quit the game
-  if (key === '\u0003') {
+  if (keyPressed === '\u0003') {
     console.log('Returning you to your boring shell.')
     process.exit();
   };
-  // Perform an action in the game
-  connection.write(keys[key]);
+  // Handle all other key presses
+  if (keyBindings[keyPressed] === undefined) return
+  connection.write(keyBindings[keyPressed]);
 };
 
 module.exports = { setupInput }
