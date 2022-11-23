@@ -23,6 +23,10 @@ const handleUserInput = function (key) {
     a: () => connection.write('Move: left'),
     s: () => connection.write('Move: down'),
     d: () => connection.write('Move: right'),
+    h: () => connection.write('Say: hi!'),
+    t: () => connection.write('Say: Delicious ¤¡¤'),
+    f: () => connection.write('Say: Feed me ¤¡¤'),
+    g: () => connection.write('Say: bye'),
   }
   keyActions[key]();
 };
