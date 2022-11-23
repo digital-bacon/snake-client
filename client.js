@@ -11,7 +11,8 @@ const connect = function () {
   conn.setEncoding("utf8");
 
   conn.on("connect", () => {
-    console.log('Game started!')
+    console.log('Game started!');
+    conn.write('Name: MB');
   });
   conn.on('data', (data) => {
     console.log(data.toString());
