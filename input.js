@@ -1,9 +1,10 @@
 const {
   ENCODING,
   EXIT_KEY,
-  EXIT_MESSAGE,
-  KEY_BINDINGS
+  EXIT_MESSAGE
  } = require("./constants");
+
+ const { keyBindings } = require("./keyBindings");
 
 // Stores the active TCP connection object.
 let connection;
@@ -26,8 +27,8 @@ const handleUserInput = function(keyPressed) {
     process.exit();
   };
   // Handle all other key presses
-  if (KEY_BINDINGS[keyPressed] === undefined) return
-  connection.write(KEY_BINDINGS[keyPressed]);
+  if (keyBindings[keyPressed] === undefined) return
+  connection.write(keyBindings[keyPressed]());
 };
 
 module.exports = { setupInput }
