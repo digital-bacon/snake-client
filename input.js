@@ -1,4 +1,9 @@
-const { KEYBINDINGS } = require("./constants");
+const {
+  ENCODING,
+  EXIT_KEY,
+  EXIT_MESSAGE,
+  KEY_BINDINGS
+ } = require("./constants");
 
 // Stores the active TCP connection object.
 let connection;
@@ -8,21 +13,21 @@ const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
-  stdin.setEncoding("utf8");
+  stdin.setEncoding(ENCODING);
   stdin.resume();
   stdin.on("data", handleUserInput);
   return stdin;
 };
 
 const handleUserInput = function(keyPressed) {
-  // \u0003 maps to ctrl+c input, used to quit the game
-  if (keyPressed === '\u0003') {
-    console.log('Returning you to your boring shell.')
+  // used to quit the game
+  if (keyPressed === EXIT_KEY) {
+    console.log(EXIT_MESSAGE)
     process.exit();
   };
   // Handle all other key presses
-  if (KEYBINDINGS[keyPressed] === undefined) return
-  connection.write(KEYBINDINGS[keyPressed]);
+  if (KEY_BINDINGS[keyPressed] === undefined) return
+  connection.write(KEY_BINDINGS[keyPressed]);
 };
 
 module.exports = { setupInput }
